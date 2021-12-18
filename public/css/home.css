@@ -1,0 +1,65 @@
+p {
+    margin: 0;
+}
+
+#title-result {
+    color: red;
+    font-size: 28px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.background-popup {
+    background: rgba(0, 0, 0, 0.3);
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.btn-request {
+    background: linear-gradient(to right, #34b1eb, #c3eb34);
+}
+
+.card-form {
+    border-radius: 20px;
+    box-shadow: 2px 2px 8px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.content {
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 20px;
+}
+
+.header {
+    font-size: 28px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.note-input {
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.overlay-popup {
+    left: 50%;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.title-content {
+    background: linear-gradient(to right, #34b1eb, #c3eb34);
+    font-weight: bold;
+    padding: 6px;
+}

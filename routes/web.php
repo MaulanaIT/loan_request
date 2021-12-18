@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DailyLoanRequestController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/api/daily-loan-request', [DailyLoanRequestController::class, 'index']);
+
+Route::get('/', [HomeController::class, "index"]);
+Route::post('/loan/store', [HomeController::class, "store"]);
