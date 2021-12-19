@@ -17,10 +17,56 @@
         <div class="bg-white card-form p-4 text-center">
             <p id="title-result">Error!</p>
             <p id="text-result">Sorry, daily requests have reached the maximum number (50).<br />Please come back tomorrow</p>
-            <button class="btn btn-success mt-4 px-5" onclick="document.getElementById('popup-result').classList.add('d-none');">OK</button>
+            <button class="btn btn-success mt-4 px-5" onclick="document.getElementById('popup-result').classList.add('d-none'); document.getElementById('popup-payment-installment').classList.remove('d-none');">Payment Installment</button>
         </div>
     </div>
 </div>
+@if (Session::get('Success'))
+<div id="popup-payment-installment" class="background-popup d-none">
+    <div class="overlay-popup">
+        <div class="bg-white card-form overflow-auto p-4 text-center" style="max-height: 80vh;">
+            <p id="title-result" class="text-success">Payment Installment</p>
+            <table id="table-payment-installment" class="table table-bordered">
+                <thead class="align-middle">
+                    <tr>
+                        <th>No.</th>
+                        <th>Date</th>
+                        <th>Principal</th>
+                        <th>Total Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $totalBalance = $dataPaymentInstallment[0]->amount_of_loan;
+                    @endphp
+                    @for ($j = 0; $j < $dataPaymentInstallment[0]->tenor; $j++)
+                    @php
+                        $principal = $dataPaymentInstallment[0]->payment_installment;
+                        $balance = $dataPaymentInstallment[0]->payment_installment * ($j + 1);
+                    @endphp
+                        @if ($j == $dataPaymentInstallment[0]->tenor - 1)
+                            <tr>
+                                <td>{{$j + 1}}</td>
+                                <td>{{date("Y-m-d", strtotime($dataPaymentInstallment[0]->created_at . "+" . $j + 1 . " month"))}}</td>
+                                <td>{{$principal + $totalBalance - $balance}}</td>
+                                <td>{{0}}</td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td>{{$j + 1}}</td>
+                                <td>{{date("Y-m-d", strtotime($dataPaymentInstallment[0]->created_at . "+" . $j + 1 . " month"))}}</td>
+                                <td>{{$principal}}</td>
+                                <td>{{$totalBalance - $balance}}</td>
+                            </tr>
+                        @endif
+                    @endfor
+                </tbody>
+            </table>
+            <button class="btn btn-success mt-2 px-5" onclick="document.getElementById('popup-payment-installment').classList.add('d-none');">OK</button>
+        </div>
+    </div>
+</div>
+@endif
 <div class="d-flex justify-content-center p-lg-5 p-md-4 p-3">
     <form class="card-form col-lg-6 col-md-8 col-12" action="/loan/store" method="POST" enctype="multipart/form-data">
         @csrf

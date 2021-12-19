@@ -16,8 +16,9 @@ class HomeController extends Controller
         $listProvince = ListProvinceModel::all();
         $listNationality = ListNationalityModel::all();
         $listTenor = ListTenorModel::all();
+        $dataPaymentInstallment = LoanRequestModel::orderBy('id', 'DESC')->limit(1)->get();
 
-        return view ("pages.home", compact('listProvince', 'listNationality', 'listTenor'));
+        return view ("pages.home", compact('dataPaymentInstallment', 'listProvince', 'listNationality', 'listTenor'));
     }
 
     function store(Request $request) {
